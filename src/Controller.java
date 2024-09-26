@@ -1,3 +1,4 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +45,19 @@ public class Controller {
 
      */
     public void changePage (String page){
+
+    }
+
+
+    /**
+     * Handles inputs from the 'left, right, select' buttons on the GUI Demo.
+     *
+     * left / right should move the active selection (dotted box) to the next element
+     * select, if valid, should change the page and/or send all relevant information to the coffee maker.
+     * @param actionEvent
+     */
+    public void handleUserInput(ActionEvent actionEvent){
+
 
     }
 
