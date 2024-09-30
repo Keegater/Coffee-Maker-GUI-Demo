@@ -37,9 +37,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="/Scenebuilder/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -47,17 +45,17 @@
                <children>
                   <HBox fx:id="homeLayout" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="homeSizeStackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="sizeIcon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="homeStrengthStackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="strengthIcon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="homeBrewStackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="brewIcon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -66,22 +64,22 @@
                   </HBox>
                   <HBox fx:id="sizeLayout" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <StackPane fx:id="size1" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="size1Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="size1Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="size2" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="size2Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="size2Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="size3" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="size3Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="size3Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="size4" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="size4Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="size4Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -90,37 +88,41 @@
                   </HBox>
                   <HBox fx:id="strengthLayout" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <StackPane fx:id="strength1" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="strength1Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="strength1Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="strength2" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="strength2Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="strength2Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="strength3" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="strength3Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="strength3Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
                      </children>
                   </HBox>
-                  <StackPane fx:id="brewingLayout" prefHeight="150.0" prefWidth="200.0">
+                  <HBox fx:id="brewingLayout" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="brewingProgressIcon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <StackPane fx:id="brewingLayoutStackpane" prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fx:id="brewingProgressIcon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
                      </children>
-                  </StackPane>
+                  </HBox>
                </children>
             </StackPane>
          </children>
     </AnchorPane>
       <HBox fx:id="demoControls" alignment="CENTER" prefHeight="59.0" prefWidth="640.0" spacing="20.0">
          <children>
-            <Button id="scroll_left" fx:id="dial_left" mnemonicParsing="false" text="Left" />
-            <Button id="scroll_select" fx:id="dial_select" mnemonicParsing="false" text="Select" />
-          <Button id="scroll_right" fx:id="dial_right" mnemonicParsing="false" text="Right" />
+            <Button id="scroll_left" fx:id="dial_left" mnemonicParsing="false" onAction="#handleButtonLeft" text="Left" />
+            <Button id="scroll_select" fx:id="dial_select" mnemonicParsing="false" onAction="#handleButtonSelect" text="Select" />
+          <Button id="scroll_right" fx:id="dial_right" mnemonicParsing="false" onAction="#handleButtonRight" text="Right" />
          </children>
          <VBox.margin>
             <Insets />

@@ -79,7 +79,7 @@
                               <ImageView fx:id="size3Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>
-                        <StackPane fx:id="size4" prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="size4Stackpane" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <ImageView fx:id="size4Icon" fitHeight="315.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
