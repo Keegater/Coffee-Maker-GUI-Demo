@@ -127,32 +127,14 @@ public class Controller {
 
      */
     public void changePage (String page){
+        getCurrentPageStackPanes().get(selectedItem).getStyleClass().remove("dotted-border");
 
+
+        currentPage = page;
+        setPageVisible(currentPage);
+        selectedItem = 0;
+        moveSelectionOutline(getCurrentPageStackPanes(), 0);
     }
-
-
-    /*
-    Going to need a moveRight and moveLeft function to move along the array you make
-     */
-
-    /*
-    private void moveRight() {
-         if (curIndex < curIcon.length - 1)
-         curIndex ++;
-          should be replaced by dotted border highlightIcon(curIndex);
-
-    }
-     */
-
-    /*
-    private void moveLeft() {
-         if (curIndex > 0)
-         curIndex --;
-         highlightIcon(curIndex);
-         should be replaced by dotted border
-
-    }
-     */
 
 
     private void highlightIcon(ImageView icon) {
@@ -190,8 +172,27 @@ public class Controller {
         moveSelectionOutline(currentElements, nextItem);
     }
 
-    public void handleButtonSelect(ActionEvent actionEvent){
+    public void handleButtonSelect(ActionEvent actionEvent) {
 
+        List<StackPane> currentElements = getCurrentPageStackPanes();
+
+        if (currentPage.equals("home")) {
+
+            switch (selectedItem) {
+                case 0:
+                    changePage("size");
+                    break;
+                case 1:
+                    changePage("strength");
+                    break;
+                case 2:
+                    changePage("brew");
+                    break;
+            }
+        } else {
+            //idk we need something
+            System.out.println("Action on " + currentPage + " page at item " + selectedItem);
+        }
     }
 
 
@@ -204,6 +205,12 @@ public class Controller {
 
         currentStackPanes.get(targetIndex).getStyleClass().add("dotted-border");
     }
+
+
+    public void handleButtonBack(ActionEvent actionE) {
+        changePage("home");
+    }
+
 
 
 
