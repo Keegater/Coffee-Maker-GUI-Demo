@@ -2,11 +2,33 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Controller {
 
     @FXML
+    private HBox homeLayout, sizeLayout, strengthLayout, brewingLayout = null;
+
+    @FXML
     private ImageView sizeIcon, strengthIcon, brewIcon, size1Icon, size2Icon, size3Icon, size4Icon, strength1Icon, strength2Icon, strength3Icon, brewingProgressIcon = null;
+
+    @FXML
+    private StackPane homeSizeStackpane, homeStrengthStackpane, homeBrewStackpane, size1Stackpane, size2Stackpane, size3Stackpane, size4Stackpane, strength1Stackpane, strength2Stackpane, strength3Stackpane, brewingLayoutStackpane = null;
+
+    // Arrays or lists to store the StackPanes for each page
+    private List<StackPane> homeStackPanes;
+    private List<StackPane> sizeStackPanes;
+    private List<StackPane> strengthStackPanes;
+
+    // Variables to keep track of the current page and the selected item
+    private String currentPage = "home";
+    private int selectedItem = 0;
+
+
 
     @FXML
     public void initialize() {
@@ -17,27 +39,87 @@ public class Controller {
          * Initialize the 'cursor' position on the first item
          */
 
+        // Assign each ImageView its icon
+        sizeIcon.setImage(new Image(getClass().getResourceAsStream("/Icons/home_size_icon.png")));
+        strengthIcon.setImage(new Image(getClass().getResourceAsStream("/Icons/home_strength_icon.png")));
+        brewIcon.setImage(new Image(getClass().getResourceAsStream("/Icons/home_brew_icon.png")));
+        size1Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/size_4oz_icon.png")));
+        size2Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/size_6oz_icon.png")));
+        size3Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/size_8oz_icon.png")));
+        size4Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/size_12oz_icon.png")));
+        strength1Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/strength_weak_icon.png")));
+        strength2Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/strength_normal_icon.png")));
+        strength3Icon.setImage(new Image(getClass().getResourceAsStream("/Icons/strength_strong_icon.png")));
+        brewingProgressIcon.setImage(new Image(getClass().getResourceAsStream("/Icons/brewing_inprogress_icon.png")));
 
-        // Load testing image
-        Image testImage = new Image(getClass().getResourceAsStream("/Icons/testing_Icon.png"));
+        // Build list of StackPanes for each page
+        homeStackPanes = new ArrayList<>();
+        homeStackPanes.add(homeSizeStackpane);
+        homeStackPanes.add(homeStrengthStackpane);
+        homeStackPanes.add(homeBrewStackpane);
 
-        // Set the image for each ImageView
-        sizeIcon.setImage(testImage);
-        strengthIcon.setImage(testImage);
-        brewIcon.setImage(testImage);
-        size1Icon.setImage(testImage);
-        size2Icon.setImage(testImage);
-        size3Icon.setImage(testImage);
-        size4Icon.setImage(testImage);
-        strength1Icon.setImage(testImage);
-        strength2Icon.setImage(testImage);
-        strength3Icon.setImage(testImage);
-        brewingProgressIcon.setImage(testImage);
+        sizeStackPanes = new ArrayList<>();
+        sizeStackPanes.add(size1Stackpane);
+        sizeStackPanes.add(size2Stackpane);
+        sizeStackPanes.add(size3Stackpane);
+        sizeStackPanes.add(size4Stackpane);
 
+        strengthStackPanes = new ArrayList<>();
+        strengthStackPanes.add(strength1Stackpane);
+        strengthStackPanes.add(strength2Stackpane);
+        strengthStackPanes.add(strength3Stackpane);
+
+
+        // Setting only homepage as visible
+        setPageVisible(currentPage);
+        moveSelectionOutline(getCurrentPageStackPanes(), 0);
 
     }
 
-    /**TODO: changePage() is called when a valid selection imput is pressed.
+
+    private void setPageVisible(String page){
+        homeLayout.setVisible(false);
+        sizeLayout.setVisible(false);
+        strengthLayout.setVisible(false);
+        brewingLayout.setVisible(false);
+
+        switch (page) {
+            case "size":
+                sizeLayout.setVisible(true);
+                break;
+            case "strength":
+                strengthLayout.setVisible(true);
+                break;
+            case "home":
+                homeLayout.setVisible(true);
+                break;
+            case "brew":
+                brewingLayout.setVisible(true);
+                break;
+        }
+    }
+
+    private List<StackPane> getCurrentPageStackPanes() {
+        switch (currentPage) {
+            case "size":
+                return sizeStackPanes;
+            case "strength":
+                return strengthStackPanes;
+            default:
+                return homeStackPanes;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    /**TODO: changePage() is called when a valid selection input is pressed.
         Makes all imageviews transparent except on the target page.
         Updates all internal logic to reflect being on a new page.
 
@@ -49,17 +131,89 @@ public class Controller {
     }
 
 
-    /**
-     * Handles inputs from the 'left, right, select' buttons on the GUI Demo.
-     *
-     * left / right should move the active selection (dotted box) to the next element
-     * select, if valid, should change the page and/or send all relevant information to the coffee maker.
-     * @param actionEvent
+    /*
+    Going to need a moveRight and moveLeft function to move along the array you make
      */
-    public void handleUserInput(ActionEvent actionEvent){
 
+    /*
+    private void moveRight() {
+         if (curIndex < curIcon.length - 1)
+         curIndex ++;
+          should be replaced by dotted border highlightIcon(curIndex);
 
     }
+     */
+
+    /*
+    private void moveLeft() {
+         if (curIndex > 0)
+         curIndex --;
+         highlightIcon(curIndex);
+         should be replaced by dotted border
+
+    }
+     */
+
+
+    private void highlightIcon(ImageView icon) {
+        icon.setStyle("-fx-effect: dropshadow(gaussian, blue, 15, 0.5, 0, 0);");
+    }
+
+
+    public void handleButtonLeft(ActionEvent actionEvent){
+        int nextItem = selectedItem;
+        List<StackPane> currentElements = getCurrentPageStackPanes();
+        int currentPageElements = currentElements.size() - 1;
+        System.out.println(currentElements.size());
+        if (selectedItem == 0){
+            nextItem = currentPageElements;
+        } else {
+            nextItem--;
+        }
+        selectedItem = nextItem;
+
+        moveSelectionOutline(currentElements, nextItem);
+    }
+
+    public void handleButtonRight(ActionEvent actionEvent){
+        int nextItem = selectedItem;
+        List<StackPane> currentElements = getCurrentPageStackPanes();
+        int currentPageElements = currentElements.size() - 1;
+        System.out.println(currentElements.size());
+        if (selectedItem >= currentPageElements){
+            nextItem = 0;
+        } else {
+            nextItem++;
+        }
+        selectedItem = nextItem;
+
+        moveSelectionOutline(currentElements, nextItem);
+    }
+
+    public void handleButtonSelect(ActionEvent actionEvent){
+
+    }
+
+
+    //will remove the dotted outline from the current stackpane and place it on the new one identified by "target index"
+    public void moveSelectionOutline(List<StackPane> currentStackPanes, int targetIndex){
+
+        for( StackPane stackPane : currentStackPanes){
+            stackPane.getStyleClass().remove("dotted-border");
+        }
+
+        currentStackPanes.get(targetIndex).getStyleClass().add("dotted-border");
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }
